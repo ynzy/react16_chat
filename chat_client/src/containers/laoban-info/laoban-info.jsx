@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { NavBar, InputItem, TextareaItem, Button } from 'antd-mobile';
+import { Redirect } from "react-router-dom";
+import { NavBar, InputItem, TextareaItem, Button, WhiteSpace } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HeaderSelector from '../../components/header-selector/header-selector';
 import { updateUser } from "../../redux/actions";
