@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "antd-mobile": "^2.3.1",
+    "axios": "^0.19.0",
+    "js-cookie": "^2.2.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
@@ -42,5 +44,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:4000"
 }

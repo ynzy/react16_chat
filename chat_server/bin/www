@@ -12,7 +12,7 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '4000');
 app.set('port', port);
 
 /**
@@ -82,6 +82,7 @@ function onError(error) {
  */
 
 function onListening() {
+  console.log(`启动服务,地址:http://localhost:${port}/`);
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
