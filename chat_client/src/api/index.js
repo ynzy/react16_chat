@@ -13,3 +13,5 @@ export const reqLogin = (user) => ajax('/login', user, 'POST')
 export const reqUpdateUser = user => ajax('/update', user, 'POST')
 // 查看用户信息(根据cookie)
 export const reqUser = () => ajax('/user')
+// 请求获取用户列表
+export const reqUserList = type => ajax('/list', { type })

@@ -72,4 +72,14 @@ router.get('/user', async (req, res) => {
   res.json({ code: 0, data: user })
 })
 
+// 查看用户列表
+router.get('/list', async (req, res) => {
+  const { type } = req.query
+  console.log(type);
+  if (!type) return res.json({ code: 1, msg: '请传入type值' })
+  let users = await User.find({ type })
+  if (users) return res.json({ code: 0, data: users })
+})
+
+
 module.exports = router;

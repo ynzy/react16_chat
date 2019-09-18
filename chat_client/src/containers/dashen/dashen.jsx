@@ -1,12 +1,19 @@
 // 大神的主路由组件
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class Dashen extends Component {
+import { getUserList } from '../../redux/actions'
+import UserList from '../../components/user-list/user-list'
+class Dashen extends Component {
+  componentDidMount() {
+    this.props.getUserList(2)
+  }
   render() {
-    return (
-      <div>
-        大神列表
-      </div>
-    )
+    return <UserList userList={this.props.userList} ></UserList>
   }
 }
+
+export default connect(
+  state => ({ userList: state.userList }),
+  { getUserList }
+)(Dashen)
