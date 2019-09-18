@@ -1,0 +1,13 @@
+{
+  "husky": {
+    "hooks": {
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "dependencies": {
+    "hooks": "^0.3.2"
+  },
+  "devDependencies": {
+    "validate-commit-msg": "^2.14.0"
+  }
+}
