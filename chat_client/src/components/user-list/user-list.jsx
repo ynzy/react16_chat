@@ -11,10 +11,10 @@ class UserList extends Component {
   }
   render() {
     return (
-      <WingBlank>
+      <WingBlank style={{ marginTop: 50, marginBottom: 50 }}>
         {
           this.props.userList.map(user => (
-            <div>
+            <div key={user._id}>
               <WhiteSpace />
               <Card>
                 <Header

@@ -1,17 +1,20 @@
-.error-msg { // 错误提示信息
+.error-msg {
+  // 错误提示信息
   color: red;
   text-align: center;
   font-size: 18px;
 }
 
-.am-tab-bar{  /*使导航始终在底部*/
+.am-tab-bar {
+  /*使导航始终在底部*/
   position: fixed;
   bottom: 0;
   width: 100%;
   height: inherit; // 包裹内容
 }
 
-.sticky-header{  /*使标题始终在顶部*/
+.sticky-header {
+  /*使标题始终在顶部*/
   z-index: 10;
   position: fixed;
   top: 0;
@@ -20,15 +23,26 @@
 
 /*消息文本居右*/
 #chat-page .chat-me .am-list-extra {
-  flex-basis: auto;  /*宽度包裹内容*/
+  flex-basis: auto;
+  /*宽度包裹内容*/
 }
+
 #chat-page .chat-me .am-list-content {
   padding-right: 15px;
   text-align: right;
 }
 
-.am-tab-bar{/*使导航始终在底部*/
+.am-tab-bar {
+  /*使导航始终在底部*/
   position: fixed;
   bottom: 0;
+  width: 100%;
+}
+
+.stick-top {
+  /*固定在顶部*/
+  z-index: 10;
+  position: fixed;
+  top: 0;
   width: 100%;
 }
