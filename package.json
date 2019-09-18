@@ -9,21 +9,7 @@
     "commit-msg": "validate-commit-msg"
   },
   "validate-commit-msg": {
-    "types": [
-      "新功能",
-      "修复",
-      "feat",
-      "fix",
-      "docs",
-      "style",
-      "refactor",
-      "perf",
-      "test",
-      "chore",
-      "revert",
-      "regexp jira\\-\\d+",
-      "regexp jira\\-\\d+\\s?[新功能|修复|feat|fix|docs|style|refactor|perf|test|chore|revert]"
-    ],
+    "types": [ "新功能", "修复", "feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert", "regexp jira\\-\\d+", "regexp jira\\-\\d+\\s?[新功能|修复|feat|fix|docs|style|refactor|perf|test|chore|revert]" ],
     "warnOnFail": false,
     "maxSubjectLength": 100,
     "subjectPattern": ".+",
