@@ -5,9 +5,15 @@
     }
   },
   "dependencies": {
+    "ghooks": "^2.0.4",
     "hooks": "^0.3.2"
   },
   "devDependencies": {
     "validate-commit-msg": "^2.14.0"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
   }
 }

@@ -7,6 +7,13 @@ colors@~0.6.0-1:
   resolved "https://registry.npm.taobao.org/colors/download/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
   integrity sha1-JCP+ZnisDF2uiFLl0OW+CMmXq8w=
 
+commander@2.9.0:
+  version "2.9.0"
+  resolved "https://registry.npm.taobao.org/commander/download/commander-2.9.0.tgz?cache=0&sync_timestamp=1567155469688&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
+  integrity sha1-nJkJQXbhIkDLItbFFGCYQA/g99Q=
+  dependencies:
+    graceful-readlink ">= 1.0.0"
+
 commander@~2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/commander/download/commander-2.1.0.tgz?cache=0&sync_timestamp=1567155469688&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcommander%2Fdownload%2Fcommander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
@@ -30,15 +37,79 @@ findup@0.1.5:
     colors "~0.6.0-1"
     commander "~2.1.0"
 
+ghooks@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.npm.taobao.org/ghooks/download/ghooks-2.0.4.tgz#fd50e040ff548906ae42cb51793a01bfe24567b9"
+  integrity sha1-/VDgQP9UiQauQstReToBv+JFZ7k=
+  dependencies:
+    findup "0.1.5"
+    lodash.clone "4.5.0"
+    manage-path "2.0.0"
+    opt-cli "1.5.1"
+    path-exists "3.0.0"
+    spawn-command "0.0.2"
+
+"graceful-readlink@>= 1.0.0":
+  version "1.0.1"
+  resolved "https://registry.npm.taobao.org/graceful-readlink/download/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
+  integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
+
 hooks@^0.3.2:
   version "0.3.2"
   resolved "https://registry.npm.taobao.org/hooks/download/hooks-0.3.2.tgz#a31f060c2026cea6cf1ca3eb178430e718e1c4a3"
   integrity sha1-ox8GDCAmzqbPHKPrF4Qw5xjhxKM=
 
+lodash._baseclone@~4.5.0:
+  version "4.5.7"
+  resolved "https://registry.npm.taobao.org/lodash._baseclone/download/lodash._baseclone-4.5.7.tgz#ce42ade08384ef5d62fa77c30f61a46e686f8434"
+  integrity sha1-zkKt4IOE711i+nfDD2GkbmhvhDQ=
+
+lodash.clone@4.3.2:
+  version "4.3.2"
+  resolved "https://registry.npm.taobao.org/lodash.clone/download/lodash.clone-4.3.2.tgz#e56b176b6823a7dde38f7f2bf58de7d5971200e9"
+  integrity sha1-5WsXa2gjp93jj38r9Y3n1ZcSAOk=
+  dependencies:
+    lodash._baseclone "~4.5.0"
+
+lodash.clone@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npm.taobao.org/lodash.clone/download/lodash.clone-4.5.0.tgz#195870450f5a13192478df4bc3d23d2dea1907b6"
+  integrity sha1-GVhwRQ9aExkkeN9Lw9I9LeoZB7Y=
+
+manage-path@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npm.taobao.org/manage-path/download/manage-path-2.0.0.tgz#f4cf8457b926eeee2a83b173501414bc76eb9597"
+  integrity sha1-9M+EV7km7u4qg7FzUBQUvHbrlZc=
+
+opt-cli@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.npm.taobao.org/opt-cli/download/opt-cli-1.5.1.tgz#04db447b13c96b992eb31685266f4ed0d9736dc2"
+  integrity sha1-BNtEexPJa5kusxaFJm9O0NlzbcI=
+  dependencies:
+    commander "2.9.0"
+    lodash.clone "4.3.2"
+    manage-path "2.0.0"
+    spawn-command "0.0.2-1"
+
+path-exists@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npm.taobao.org/path-exists/download/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
+  integrity sha1-zg6+ql94yxiSXqfYENe1mwEP1RU=
+
 semver-regex@1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/semver-regex/download/semver-regex-1.0.0.tgz#92a4969065f9c70c694753d55248fc68f8f652c9"
   integrity sha1-kqSWkGX5xwxpR1PVUkj8aPj2Usk=
+
+spawn-command@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npm.taobao.org/spawn-command/download/spawn-command-0.0.2.tgz#9544e1a43ca045f8531aac1a48cb29bdae62338e"
+  integrity sha1-lUThpDygRfhTGqwaSMspva5iM44=
+
+spawn-command@0.0.2-1:
+  version "0.0.2-1"
+  resolved "https://registry.npm.taobao.org/spawn-command/download/spawn-command-0.0.2-1.tgz#62f5e9466981c1b796dc5929937e11c9c6921bd0"
+  integrity sha1-YvXpRmmBwbeW3Fkpk34RycaSG9A=
 
 validate-commit-msg@^2.14.0:
   version "2.14.0"
