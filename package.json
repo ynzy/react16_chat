@@ -5,36 +5,34 @@
   "repository": "https://github.com/ynzy/React-chat.git",
   "author": "zhangyong <zhangyong@163.com>",
   "license": "MIT",
+  "ghooks": {
+    "commit-msg": "validate-commit-msg"
+  },
+  "validate-commit-msg": {
+    "types": [
+      "新功能",
+      "修复",
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "chore",
+      "revert",
+      "regexp jira\\-\\d+",
+      "regexp jira\\-\\d+\\s?[新功能|修复|feat|fix|docs|style|refactor|perf|test|chore|revert]"
+    ],
+    "warnOnFail": false,
+    "maxSubjectLength": 100,
+    "subjectPattern": ".+",
+    "subjectPatternErrorMsg": "subject does not match subject pattern!",
+    "helpMessage": ""
+  },
   "devDependencies": {
     "ghooks": "^2.0.4",
     "husky": "^3.0.5",
     "validate-commit-msg": "^2.14.0"
-  },
-  "config": {
-    "ghooks": {
-      "commit-msg": "validate-commit-msg"
-    },
-    "validate-commit-msg": {
-      "types": [
-        "新功能",
-        "修改",
-        "feat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "perf",
-        "test",
-        "chore",
-        "revert",
-        "regexp jira\\-\\d+",
-        "regexp jira\\-\\d+\\s?[新功能|修改|feat|fix|docs|style|refactor|perf|test|chore|revert]"
-      ],
-      "warnOnFail": false,
-      "maxSubjectLength": 100,
-      "subjectPattern": ".+",
-      "subjectPatternErrorMsg": "subject does not match subject pattern!",
-      "helpMessage": ""
-    }
   }
 }
