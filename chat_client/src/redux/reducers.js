@@ -16,10 +16,8 @@ const initUser = {
 function user(state = initUser, action) {
   switch (action.type) {
     case AUTH_SUCCESS: // 认证成功
-    
-    const {type, avatar} = action.data
+      const { type, avatar } = action.data
       const redirectTo = getRedirectPath(type, avatar)
-      console.log(redirectTo);
       return { ...action.data, redirectTo }
     case ERROR_MSG: //错误信息提示
       return { ...state, msg: action.data }

@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { NavBar, InputItem, TextareaItem, Button, WhiteSpace } from 'antd-mobile';
 import { connect } from 'react-redux';
 import HeaderSelector from '../../components/header-selector/header-selector';
+
 import { updateUser } from "../../redux/actions";
 class DashenInfo extends Component {
   state = {
@@ -33,7 +34,9 @@ class DashenInfo extends Component {
           onChange={val => this.handleChange('info', val)}
         />
         <WhiteSpace />
-        <Button type="primary" onClick={() => this.props.updateUser(this.state)}>保存</Button>
+        <Button type="primary"
+          onClick={() => this.props.updateUser(this.state)}
+        >保存</Button>
       </div>
     );
   }

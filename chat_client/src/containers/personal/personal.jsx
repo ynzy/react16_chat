@@ -1,30 +1,58 @@
 // 用户个人中心路由组件
 import React, { Component } from 'react'
-import { Result, List, WhiteSpace, Button } from 'antd-mobile'
+import { Result, List, WhiteSpace, Modal, Button } from 'antd-mobile'
+import { connect } from "react-redux";
+import Cookies from 'js-cookie';
 
+import { resetUser } from "../../redux/actions";
 const Item = List.Item;
 const Brief = Item.Brief;
-export default class Personal extends Component {
+class Personal extends Component {
+
+  handleLogout = () => {
+    Modal.alert('退出', '确认退出登录吗?', [
+      {
+        text: '取消',
+        onPress: () => console.log('cancel')
+      },
+      {
+        text: '确认',
+        onPress: () => {
+          // 清除cookie中的userid
+          Cookies.remove('userid')
+          // 重置redux中的user状态
+          this.props.resetUser()
+        }
+      }
+    ])
+  }
+
   render() {
+    const { username, avatar, post, info, salary, company } = this.props.user
     return (
       <div>
         <Result
-          img={<img src={require(`../../assets/images/头像1.png`)} style={{ width: 50 }} alt="avatar" />}
-          title="张三"
-          message="IBM"
+          img={<img src={require(`../../assets/images/${avatar}.png`)} style={{ width: 50 }} alt="avatar" />}
+          title={username}
+          message={company}
         />
         <List renderHeader={() => '相关信息'}>
           <Item multipleLine>
-            <Brief>职位:前端工程师</Brief>
-            <Brief>简介:React/Vue/jQuery</Brief>
-            <Brief>薪资:20k</Brief>
+            <Brief>职位:{post}</Brief>
+            <Brief>简介:{info}</Brief>
+            {salary ? <Brief>薪资:{salary}</Brief> : null}
           </Item>
         </List>
         <WhiteSpace />
         <List>
-          <Button type="warning">退出登录</Button>
+          <Button onClick={this.handleLogout} type="warning">退出登录</Button>
         </List>
       </div>
     )
   }
 }
+
+export default connect(
+  state => ({ user: state.user }),
+  { resetUser }
+)(Personal)

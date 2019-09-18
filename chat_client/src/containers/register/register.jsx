@@ -19,7 +19,7 @@ class Register extends Component {
   }
   // 注册
   register = () => {
-    console.log(this.state);
+    // console.log(this.state);
     this.props.register(this.state)
   }
   // 跳转到login路由
@@ -28,8 +28,8 @@ class Register extends Component {
   }
   render() {
     const { type } = this.state
-    const { redirectTo, msg} = this.props
-    if(redirectTo) {
+    const { redirectTo, msg } = this.props
+    if (redirectTo) {
       return <Redirect to={redirectTo} />
     }
     return (
@@ -60,5 +60,5 @@ class Register extends Component {
 
 export default connect(
   state => state.user,
-  {register}
+  { register }
 )(Register)

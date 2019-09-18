@@ -54,8 +54,8 @@ class Main extends Component {
     // cookie 中有userid
     // redux 中的user是空对象
     const userid = Cookies.get('userid')
-    const {user} = this.props
-    if(userid && !user._id) {
+    const { user } = this.props
+    if (userid && !user._id) {
       this.props.getUser() //获取user并保存到redux中
     }
   }
@@ -64,22 +64,22 @@ class Main extends Component {
     const pathname = this.props.location.pathname
     // 判断用户是否已经登录(过)(cookie中的userid是否有值)
     const userid = Cookies.get('userid')
-    if(!userid) { // 如果没有,自动跳转到登录界面
+    if (!userid) { // 如果没有,自动跳转到登录界面
       return <Redirect to="/login" />
     }
-/*     if (!userid) {
-      this.props.history.replace('/login')
-      return null
-    } */
+    /*     if (!userid) {
+          this.props.history.replace('/login')
+          return null
+        } */
     // cookie 中有userid
     // redux 中的user 是否有数据
-    const {user} = this.props
-    if(!user._id) {
+    const { user } = this.props
+    if (!user._id) {
       return null // 不做任何显示
     } else {
       // 请求跟路径时, 自动跳转到对应的用户主界面
-      if(pathname === '/') {
-        const path = getRedirectPath(user.type, user.header)
+      if (pathname === '/') {
+        const path = getRedirectPath(user.type, user.avatar)
         return <Redirect to={path} />
       }
     }
@@ -104,14 +104,14 @@ class Main extends Component {
           <Route path='/personal' component={Personal} />
           <Route component={NotFound} />
         </Switch>
-        {currentNav ? <NavFooter unReadCount={this.props.unReadCount} 
-        navList={this.navList} /> : null}
+        {currentNav ? <NavFooter unReadCount={this.props.unReadCount}
+          navList={this.navList} /> : null}
       </div>
     )
   }
 }
 
 export default connect(
-  state => ({user: state.user}), 
-  {getUser}
+  state => ({ user: state.user }),
+  { getUser }
 )(Main)
