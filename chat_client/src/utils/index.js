@@ -12,7 +12,7 @@ export function getRedirectPath(type, avatar) {
   let path = ''
 
   // 根据type得到path  1:dashen,2:laoban
-  path += type === 1 ? '/dashen' : '/laban'
+  path += type === 1 ? '/dashen' : '/laoban'
   // 如果没有头像添加info
   if(!avatar) {
     path += 'info'

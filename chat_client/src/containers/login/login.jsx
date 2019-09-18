@@ -40,7 +40,7 @@ import { login } from "../../redux/actions";
             <WhiteSpace />
             <Button style={{ width: '60%', margin: '0 auto' }} type="primary" onClick={this.login}>登录</Button>
             <WhiteSpace />
-            <Button onClick={this.toRegister}>已有账号</Button>
+            <Button onClick={this.toRegister}>没有账号</Button>
           </List>
         </WingBlank>
       </div>

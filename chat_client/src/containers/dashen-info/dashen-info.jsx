@@ -6,20 +6,20 @@ import HeaderSelector from '../../components/header-selector/header-selector';
 import { updateUser } from "../../redux/actions";
 class DashenInfo extends Component {
   state = {
-    avator: '', //头像
+    avatar: '', //头像
     info: '', //个人简介
     post: '', //求职岗位
   }
   handleChange = (name, val) => {
     this.setState({ [name]: val })
   }
-  setHeader = avator => {
-    this.setState({ avator })
+  setHeader = avatar => {
+    this.setState({ avatar })
   }
   render() {
     const { user } = this.props
     // 如果信息已完善,自动跳转到dashen主界面
-    if (user.avator) {
+    if (user.avatar) {
       return <Redirect to='/dashen' />
     }
     return (
