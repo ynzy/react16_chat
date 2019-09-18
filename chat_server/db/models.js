@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/chat_test');
 // 获取连接对象
 const conn = mongoose.connection;
-conn.on('connected',()=>console.log('连接数据库成功'))
+conn.on('connected', () => console.log('连接数据库成功'))
 
 // 创建user模型
 const userSchema = mongoose.Schema({
@@ -36,7 +36,7 @@ const userSchema = mongoose.Schema({
      * 1 dashen
      * 2 laoban
      */
-    enum: [1,2],
+    enum: [1, 2],
     require: true
   },
   avatar: {  //avatar
@@ -64,6 +64,20 @@ const userSchema = mongoose.Schema({
   }
 })
 
-const UserModoel = mongoose.model('User',userSchema)
+const UserModel = mongoose.model('User', userSchema)
 
-module.exports = UserModoel
+exports.User = UserModel
+
+// 定义 chats集合的文档结构
+const chatSchema = mongoose.Schema({
+  from: { type: String, required: true }, //发送用户id
+  to: { type: String, required: true }, // 接收用户的id
+  chat_id: { type: String, required: true }, // from和to组成的字符串
+  content: { type: String, required: true }, // 内容
+  read: { type: Boolean, default: false }, //标识是否已读
+  created_time: { type: Number } //创建时间
+})
+// 定义能操作chats数据集合的Model
+const ChatModel = mongoose.model('chat', chatSchema); // 集合为: chats
+// 向外暴露Model
+exports.Chat = ChatModel
