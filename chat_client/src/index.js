@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { HashRouter, Switch, Route } from "react-router-dom";
 
-import './test/socketio_test'
+// import './test/socketio_test'
 
 import store from './redux/store'
 import Login from './containers/login/login';

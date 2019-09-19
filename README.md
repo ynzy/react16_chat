@@ -325,3 +325,69 @@ export default connect(
   { sendMsg }
 )(Chat);
 ```
+3. 列表自动滑到底部显示
+```js
+    componentDidMount() {
+    // 初始显示列表
+    window.scrollTo(0, document.body.scrollHeight)
+
+  }
+
+  componentDidUpdate () {
+    // 更新显示列表
+    window.scrollTo(0, document.body.scrollHeight)
+  }
+```
+4. 表情功能
+本质就是一个字符文本, 可以作用为字符串直接使用, 各个操作系统能显示
+在线可用表情: https://emojipedia.org/
+```jsx
+  state = {
+    content: '',  // 输入聊天的内容
+    isShow: false // 是否显示表情列表
+  }
+  // 在第一次render()之前回调
+  componentWillMount() {
+    // 初始化表情列表数据
+    const emojis = ['😀', '😃', '😄', '😁', '😆', '😅', '🤣', '😂', '🙂', '🙃', '😉', '😊', '😇', '😍', '🤩', '😘', '😗', '😚', '😙', '😋', '😛', '😜', '🤪', '😝', '🤑', '🤗', '🤭', '🤫', '🤔', '🤐', '🤨', '😐', '😑', '😶', '😏', '😒', '🙄', '😬', '🤥', '😌', '😔', '😪', '🤤', '😴', '😷', '🤒', '🤕', '🤢', '🤮', '🤧']
+    this.emojis = emojis.map(emoji => ({ text: emoji }))
+  }
+// 切换表情列表的显示
+  toggleShow = () => {
+    const isShow = !this.state.isShow;
+    this.setState({ isShow })
+    if (isShow) {
+      // !异步手动派发resize时间,解决表情列表显示bug
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'))
+      });
+    }
+  }
+<div className='am-tab-bar'>
+ <InputItem
+   placeholder='请输入'
+   value={this.state.content}
+   onChange={val => this.setState({ content: val })}
+   onFocus={() => this.setState({ isShow: false })}
+   extra={
+     <span>
+       <span role="img" onClick={this.toggleShow} style={{ marginRight: 5 }}>😊</span>
+       <span onClick={this.handleSend}>发送</span>
+     </span>
+   }
+ />
+ {
+   this.state.isShow ? (
+     <Grid
+       data={this.emojis}
+       columnNum={8}
+       carouselMaxRow={4}
+       isCarousel={true}
+       onClick={(item) => {
+         this.setState({ content: this.state.content + item.text })
+       }}
+     />
+   ) : null
+ }
+</div>
+```

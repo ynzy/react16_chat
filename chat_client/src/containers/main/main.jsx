@@ -12,6 +12,7 @@ import Message from '../message/message'
 import Personal from '../personal/personal'
 import NotFound from '../../components/not-found/not-found'
 import NavFooter from '../../components/nav-footer/nav-footer'
+import Chat from '../chat/chat'
 
 import { getUser } from '../../redux/actions'
 import { getRedirectPath } from '../../utils'
@@ -73,7 +74,7 @@ class Main extends Component {
         } */
     // cookie 中有userid
     // redux 中的user 是否有数据
-    const { user } = this.props
+    const { user, unReadCount } = this.props
     if (!user._id) {
       return null // 不做任何显示
     } else {
@@ -83,28 +84,33 @@ class Main extends Component {
         return <Redirect to={path} />
       }
     }
-    // 指定 哪个nav应该被隐藏
-    if (user.type === 'laoban') {
-      this.navList[1].hide = true
-    } else {
-      this.navList[0].hide = true
+
+    const { navList } = this
+    const path = this.props.location.pathname //请求路径
+    const currentNav = navList.find(nav => nav.path === path) //得到当前的nav,可能没有
+
+    if (currentNav) {
+      // 指定 哪个nav应该被隐藏
+      if (user.type === 2) {
+        this.navList[1].hide = true
+      } else {
+        this.navList[0].hide = true
+      }
     }
-    // 得到当前的nav
-    const currentNav = this.navList.find(nav => nav.path === pathname)
     return (
       <div>
         {currentNav ? <NavBar className='stick-top' >{currentNav.title}</NavBar> : null}
         <Switch>
+          {
+            navList.map(nav => <Route key={nav.path} path={nav.path} component={nav.component} />)
+          }
           <Route path='/laobaninfo' component={LaobanInfo} />
           <Route path='/dasheninfo' component={DashenInfo} />
+          <Route path='/chat/:userid' component={Chat} />
 
-          <Route path='/dashen' component={Dashen} />
-          <Route path='/laoban' component={Laoban} />
-          <Route path='/message' component={Message} />
-          <Route path='/personal' component={Personal} />
           <Route component={NotFound} />
         </Switch>
-        {currentNav ? <NavFooter unReadCount={this.props.unReadCount}
+        {currentNav ? <NavFooter unReadCount={unReadCount}
           navList={this.navList} /> : null}
       </div>
     )
@@ -112,6 +118,6 @@ class Main extends Component {
 }
 
 export default connect(
-  state => ({ user: state.user }),
+  state => ({ user: state.user, unReadCount: state.chat.unReadCount }),
   { getUser }
 )(Main)

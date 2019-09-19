@@ -108,6 +108,10 @@ export const getUserList = type => {
 }
 
 /**
+ * 单例对象
+ * 1. 创建对象之前
+ * 2. 创建对象之后
+ * 
  * 初始化客户端socketio
  * 1. 连接服务器
  * 2. 绑定用于接收服务器返回chatMsg的监听
@@ -117,6 +121,8 @@ function initIO(dispatch, userid) {
   if (!io.socket) {
     // 连接服务器,得到与服务器的连接对象
     io.socket = io('ws://localhost:4000') // 2. 创建对象之后: 保存对象
+    console.log('连接服务器');
+
     // 绑定监听, 接收服务器发送的消息
     io.socket.on('receiveMsg', (chatMsg) => {
       console.log('客户端接收服务器发送的消息', chatMsg)
@@ -145,7 +151,10 @@ async function getMsgList(dispatch, userid) {
 
 // 发送消息的异步action
 export const sendMsg = ({ from, to, content }) => {
-  return async dispatch => {
+  console.log({ from, to, content });
+  console.log(io.socket);
+
+  return dispatch => {
     io.socket.emit('sendMsg', { from, to, content })
   }
 }

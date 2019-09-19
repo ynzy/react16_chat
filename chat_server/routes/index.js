@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
   let user = await User.findOne(body, filter)
   // console.log(user);
   if (!user) return res.json({ code: 1, msg: '用户名或密码错误' })
-  res.cookie('userid', user._id, { maxAge: 1000 * 60 ^ 60 * 24 * 7 })
+  res.cookie('userid', user._id, { maxAge: 1000 * 60 * 60 * 24 * 7 })
   res.json({ code: 0, data: user })
 
 })
