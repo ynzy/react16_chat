@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { NavBar, List, InputItem, Icon, Grid } from 'antd-mobile'
 import { connect } from "react-redux";
+import QueueAnim from 'rc-queue-anim'
 
 import { sendMsg, readMsg } from "../../redux/actions";
 
@@ -69,29 +70,32 @@ class Chat extends Component {
           onLeftClick={() => this.props.history.goBack()}
         >{users[targetId].username}</NavBar>
         <List style={{ marginBottom: 50, marginTop: 50 }}>
-          {
-            msgs.map(msg => {
-              if (msg.from === targetId) {
-                return (
-                  <Item
-                    key={msg._id}
-                    thumb={targetIcon}>
-                    {msg.content}
-                  </Item>
-                )
-              } else {
-                return (
-                  <Item
-                    key={msg._id}
-                    className='chat-me'
-                    extra='我'
-                  >
-                    {msg.content}
-                  </Item>
-                )
-              }
-            })
-          }
+          {/*alpha left right top bottom scale scaleBig scaleX scaleY*/}
+          <QueueAnim type='left' dalay={100}>
+            {
+              msgs.map(msg => {
+                if (msg.from === targetId) {
+                  return (
+                    <Item
+                      key={msg._id}
+                      thumb={targetIcon}>
+                      {msg.content}
+                    </Item>
+                  )
+                } else {
+                  return (
+                    <Item
+                      key={msg._id}
+                      className='chat-me'
+                      extra='我'
+                    >
+                      {msg.content}
+                    </Item>
+                  )
+                }
+              })
+            }
+          </QueueAnim>
         </List>
         <div className='am-tab-bar'>
           <InputItem
