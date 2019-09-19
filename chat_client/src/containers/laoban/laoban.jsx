@@ -6,7 +6,7 @@ import { getUserList } from '../../redux/actions'
 import UserList from '../../components/user-list/user-list'
 class Laoban extends Component {
   componentDidMount() {
-    this.props.getUserList(2)
+    this.props.getUserList(1)
   }
   render() {
     return <UserList userList={this.props.userList} ></UserList>

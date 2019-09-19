@@ -18,21 +18,15 @@ let getLastMsgs = (chatMsgs) => {
   const lastMsgObjs = {}
   chatMsgs.forEach(msg => {
     // 得到msg的聊天id
+    // console.log(msg);
     const chatId = msg.chat_id
-    console.log(lastMsgObjs[chatId]);
-
     // 获取已保存的当前组件的lastMsg
     const lastMsg = lastMsgObjs[chatId]
-
     if (!lastMsg) { //当前msg就是所在组的lastMsg
       lastMsgObjs[chatId] = msg
-      console.log(lastMsg);
-
-
     } else { //有
       // 如果msg比lastMsg晚,就将msg保存为lastMsg
-      if (msg.create_time > lastMsg.create_time) {
-        console.log(msg);
+      if (msg.created_time > lastMsg.created_time) {
         lastMsgObjs[chatId] = msg
       }
     }
@@ -44,8 +38,7 @@ let getLastMsgs = (chatMsgs) => {
   lastMsgs.sort((m1, m2) => {
     return m2.create_time - m1.create_time
   })
-  console.log(lastMsgs);
-
+  // console.log(lastMsgs);
   return lastMsgs
 }
 class Message extends Component {
