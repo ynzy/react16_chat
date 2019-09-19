@@ -184,5 +184,144 @@ export const readMsg = userid => {
   }
 }
 ```
-TODO: 该写这里了
+
 3. redux/reducers.js
+```js
+import { 
+  RECEIVE_MSG_LIST, RECEIVE_MSG, MSG_READ
+} from "./action-types";
+
+const initChat = {
+  chatMsgs: [], // 消息数组 [{from: id1,to: id2}]
+  users: {}, // 所有用户的集合对象{id1: user1, id2: user2}
+  unReadCount: 0 // 未读消息的数量  
+}
+
+// 管理聊天相关信息数据的reducer
+function chat(state = initChat, action) {
+  switch (action.type) {
+    case RECEIVE_MSG:
+      const { chatMsg, userid } = action.data
+      return {
+        chatMsgs: [...state.chatMsgs, chatMsg],
+        users: state.users,
+        unReadCount: state.unReadCount + (!chatMsg.read && chatMsg.to === userid ? 1 : 0)
+      }
+    case RECEIVE_MSG_LIST:
+      const { chatMsgs, users, userid } = action.data
+      return {
+        chatMsgs,
+        users,
+        unReadCount: chatMsgs.reduce((preTotal, msg) => { //别人发给我的未读消息
+          return preTotal + (!msg.read && msg.to === userid ? 1 : 0)
+        }, 0)
+      }
+    case MSG_READ:
+      const {count, from, to} = action.data
+      return {
+        chatMsgs: state.chatMsgs.map(msg => {
+          if(msg.from === from && msg.to === to && !msg.read) {
+            // msg.read = true // 不能直接修改状态
+            return {...msg,read: true}
+          } else {
+            return msg
+          }
+        }),
+        users: state.users,
+        unReadCount: state.unReadCount-count
+      }
+    default:
+      return state
+  }
+}
+
+export default combineReducers({
+  chat
+})
+```
+
+#### 2.16.6. 聊天组件: containers/chat/chat.jsx
+1. 动态组件
+```js
+// 对话聊天组件
+import React, { Component } from 'react';
+import { NavBar, List, InputItem } from 'antd-mobile'
+import { connect } from "react-redux";
+
+import { sendMsg } from "../../redux/actions";
+
+const Item = List.Item
+
+class Chat extends Component {
+  state = {
+    content: ''
+  }
+  submit = () => {
+    const content = this.state.connect.trim();
+    const to = this.props.match.params.userid;
+    const from = this.props.user._id;
+    this.props.sendMsg({ from, to, content })
+    this.setState({ content: '' })
+  }
+  render() {
+    const { user } = this.props
+    const { chatMsgs, users } = this.props.chat
+    const targetId = this.props.match.params.userid
+    if (!users[targetId]) return null
+    const meId = user._id
+    const chatId = [targetId, meId].sort().join('_')
+    const msgs = chatMsgs.filter(msg => msg.chat_id === chatId)
+    const targetIcon = users[targetId] ?
+      require(`../../assets/images/${users[targetId].avatar}.png`) : null;
+
+    return (
+      <div id='chat-page'>
+        <NavBar
+          className='skick-top'
+          icon={<Icon type='left' />}
+        >{users[targetId].username}</NavBar>
+        <List style={{ marginBottom: 50, marginTop: 50 }}>
+          {
+            msgs.map(msg => {
+              if (msg.from === targetId) {
+                return (
+                  <Item
+                    key={mag._id}
+                    thumb={targetIcon}>
+                    {msg.content}
+                  </Item>
+                )
+              } else {
+                return (
+                  <Item
+                    key={msg._id}
+                    className='chat-me'
+                    extra='我'
+                  >
+                    {msg.content}
+                </Item>
+                )
+              }
+            })
+          }
+        </List>
+        <div className='am-tab-bar'>
+          <InputItem
+            placeholder='请输入'
+            value={this.state.connect}
+            onChange={val => this.setState({content: val})}
+            extra={
+              <span onClick={this.submit}>发送</span>
+            }
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default connect(
+  state => ({ user: state.user, chat: state.chat }),
+  { sendMsg }
+)(Chat);
+```

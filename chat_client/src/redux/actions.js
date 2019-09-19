@@ -36,6 +36,7 @@ export function register({ username, password, password2, type }) {
     const result = response.data
     // 如果是正确的
     if (result.code === 0) {
+      getMsgList(dispatch, result.data._id)
       // 分发成功的action
       dispatch(authSuccess(result.data))
     } else {
@@ -51,9 +52,16 @@ export const login = ({ username, password }) => {
     return errorMsg('用户密码必须输入')
   }
   return async dispatch => {
+    // 发送注册的异步ajax请求
+    /*const promise = reqLogin(user)
+    promise.then(response => {
+      const result = response.data  // {code: 0/1, data: user, msg: ''}
+    })*/
     const response = await reqLogin({ username, password })
     const result = response.data
     if (result.code === 0) {
+      getMsgList(dispatch, result.data._id)
+      // 分发授权成功的action
       dispatch(authSuccess(result.data))
     } else {
       dispatch(errorMsg(result.msg))
@@ -80,6 +88,7 @@ export const getUser = () => {
     const response = await reqUser()
     const result = response.data
     if (result.code === 0) {
+      getMsgList(dispatch, result.data._id)
       dispatch(receiveUser(result.data))
     } else {
       dispatch(resetUser(result.msg))
