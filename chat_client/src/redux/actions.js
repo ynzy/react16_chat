@@ -1,6 +1,6 @@
 /** 包含所有action creator 函数的模块 */
 import { AUTH_SUCCESS, ERROR_MSG, RECEIVE_USER, RESET_USER, RECEIVE_USER_LIST, RECEIVE_MSG_LIST, RECEIVE_MSG, MSG_READ } from "./action-types";
-import { reqRegister, reqLogin, reqUpdateUser, reqUser, reqUserList, reqChatMsgList, reqReadChatMsg } from "../api/index";
+import { reqRegister, reqLogin, reqUpdateUser, reqUser, reqUserList, reqChatMsgList, reqReadMsg } from "../api/index";
 import io from 'socket.io-client'
 
 
@@ -160,9 +160,9 @@ export const sendMsg = ({ from, to, content }) => {
 }
 
 // 更新读取消息的异步action
-export const readMsg = userid => {
+export const readMsg = (userid) => {
   return async (dispatch, getState) => {
-    const response = await reqReadChatMsg(userid)
+    const response = await reqReadMsg(userid)
     const result = response.data
     if (result.code === 0) {
       const count = result.data

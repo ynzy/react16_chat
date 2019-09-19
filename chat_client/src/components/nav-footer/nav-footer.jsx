@@ -7,11 +7,13 @@ const Item = TabBar.Item
 class NavFooter extends Component {
 
   static propTypes = {
-    navList: PropTypes.array.isRequired
+    navList: PropTypes.array.isRequired,
+    unReadCount: PropTypes.number.isRequired
   }
   render() {
+    let { navList, unReadCount } = this.props
     // nav.hisde = true/fasls hide 代表当前项应该被隐藏
-    const navList = this.props.navList.filter(nav => !nav.hide) // 回调函数返回值为true,当前元素就留下,否则不留
+    navList = navList.filter(nav => !nav.hide) // 回调函数返回值为true,当前元素就留下,否则不留
     // 当前的请求路径
     const { pathname } = this.props.location
     return (
@@ -19,6 +21,7 @@ class NavFooter extends Component {
         {
           navList.map((nav, index) => (
             <Item key={nav.path}
+              badge={nav.path === '/message' ? unReadCount : 0}
               title={nav.text}
               icon={{ uri: require(`./imgs/${nav.icon}.png`) }}
               selectedIcon={{ uri: require(`./imgs/${nav.icon}-selected.png`) }}

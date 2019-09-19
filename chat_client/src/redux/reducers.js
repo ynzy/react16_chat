@@ -69,7 +69,7 @@ function chat(state = initChat, action) {
       return {
         chatMsgs: [...state.chatMsgs, chatMsg],
         users: state.users,
-        unReadCount: state.unReadCount + (!chatMsg.read && chatMsg.to === action.data.userid ? 1 : 0)
+        unReadCount: state.unReadCount + (!chatMsg.read && chatMsg.to === action.data.isToMe ? 1 : 0)
       }
     case MSG_READ:
       const { count, from, to } = action.data
@@ -83,7 +83,7 @@ function chat(state = initChat, action) {
           }
         }),
         users: state.users,
-        unReadCount: state.unReadCount - count
+        unReadCount: (state.unReadCount === 0 ? 0 : state.unReadCount - count)
       }
     default:
       return state
