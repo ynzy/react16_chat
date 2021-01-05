@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "antd-mobile": "^2.3.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "js-cookie": "^2.2.1",
     "rc-queue-anim": "^1.8.2",
     "react": "^16.9.0",
